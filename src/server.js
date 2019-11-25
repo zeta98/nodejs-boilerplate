@@ -5,6 +5,7 @@ import cors from 'cors'
 
 import config from './config'
 import userRouter from './routes/user'
+import authMiddleware from './api/authMiddleware'
 
 export const app = express()
 
@@ -16,6 +17,8 @@ app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
 app.use('/users', userRouter)
+
+app.use(authMiddleware)
 
 export const start = () => {
   const { apiPort } = config
